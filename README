@@ -1,55 +1,142 @@
-Weightbot-API
+NAME
+    Weightbot::API - Get Weightbot iPhone app data from weightbot.com
 
-The README is used to introduce the module and provide instructions on
-how to install the module, any machine dependencies it may have (for
-example C compilers and installed libraries) and any other information
-that should be provided before the module is installed.
+VERSION
+    Version 0.01
 
-A README file is required for CPAN modules since CPAN extracts the README
-file from a module distribution so that people browsing the archive
-can use it to get an idea of the module's uses. It is usually a good idea
-to provide version information here so that people can decide whether
-fixes for the module are worth downloading.
+SYNOPSIS
+    There is a great iPhone weight tracking app
+    http://tapbots.com/software/weightbot/. It backups it's data to the site
+    https://weightbot.com/ where everybody who uses that app can login and
+    download the file with the records.
 
+    This module gets that data and shows it as a pretty data structure.
 
-INSTALLATION
+        use Weightbot::API;
+        use Data::Dumper;
 
-To install this module, run the following commands:
+        my $wi = Weightbot::API->new({
+            email    => 'user@example.com',
+            password => '******',
+        }); 
 
-	perl Makefile.PL
-	make
-	make test
-	make install
+        say $wi->raw_data;
+        say Dumper $wi->data;
 
-SUPPORT AND DOCUMENTATION
+    The object does not send requests to site until data is needed to be
+    retrieved. The first executed method data() or raw_data() will get data
+    from the site and the data will be stored in the object, so you can use
+    raw_data() and data() many times without unnecessary requests.
 
-After installing, you can find documentation for this module with the
-perldoc command.
+    Site https://weightbot.com/ does not have real API, this module behaves
+    as a browser.
 
-    perldoc Weightbot::API
+SUBROUTINES/METHODS
+  new
+    Creates new object. It has to get parameters 'email' and 'password'.
+    Optionally you can specify 'site' with some custom site url (default is
+    'https://weightbot.com'). The other optional thing is to specify
+    'raw_data'.
 
-You can also look for information at:
+        my $wi = Weightbot::API->new({
+            email    => 'user@example.com',
+            password => '******',
+        }); 
 
-    RT, CPAN's request tracker
+  raw_data
+    Returns the weight records in the format as they are stored on the site.
+    Here is an example:
+
+        date, kilograms, pounds
+        2008-12-04, 80.9, 178.4
+        2008-12-05, 82.6, 182.1
+        2008-12-06, 81.9, 180.6
+        2008-12-08, 82.6, 182.1
+
+    You can run this method many times but only the first run will get data
+    from the site.
+
+  data
+    Returns the weight data in a structure. In that data some dates can be
+    skipped. In this structure all the dates are present, but if there is no
+    weight for that date the empty sting is used.
+
+    An example for the data show in raw_data() method:
+
+        $VAR1 = [
+                  {
+                    'n' => 1,
+                    'date' => '2008-12-04',
+                    'kg' => '80.9',
+                    'lb' => '178.4'
+                  },
+                  {
+                    'n' => 2,
+                    'date' => '2008-12-05',
+                    'kg' => '82.6',
+                    'lb' => '182.1'
+                  },
+                  {
+                    'n' => 3,
+                    'date' => '2008-12-06',
+                    'kg' => '81.9',
+                    'lb' => '180.6'
+                  },
+                  {
+                    'n' => 4,
+                    'date' => '2008-12-07',
+                    'kg' => '',
+                    'lb' => ''
+                  },
+                  {
+                    'n' => 5,
+                    'date' => '2008-12-08',
+                    'kg' => '82.6',
+                    'lb' => '182.1'
+                  }
+                ];
+
+AUTHOR
+    Ivan Bessarabov, `<ivan@bessarabov.ru>'
+
+BUGS
+    Please report any bugs or feature requests to `bug-weightbot-api at
+    rt.cpan.org', or through the web interface at
+    http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Weightbot-API. I will be
+    notified, and then you'll automatically be notified of progress on your
+    bug as I make changes. You can also submit a bug or a feature request on
+    GitHub.
+
+SOURCE CODE
+    The source code for this module is hosted on GitHub
+    http://github.com/bessarabov/Weightbot-API
+
+SUPPORT
+    You can find documentation for this module with the perldoc command.
+
+        perldoc Weightbot::API
+
+    You can also look for information at:
+
+    * RT: CPAN's request tracker
         http://rt.cpan.org/NoAuth/Bugs.html?Dist=Weightbot-API
 
-    AnnoCPAN, Annotated CPAN documentation
+    * AnnoCPAN: Annotated CPAN documentation
         http://annocpan.org/dist/Weightbot-API
 
-    CPAN Ratings
+    * CPAN Ratings
         http://cpanratings.perl.org/d/Weightbot-API
 
-    Search CPAN
+    * Search CPAN
         http://search.cpan.org/dist/Weightbot-API/
 
-
+ACKNOWLEDGEMENTS
 LICENSE AND COPYRIGHT
+    Copyright 2011 Ivan Bessarabov.
 
-Copyright (C) 2011 Ivan Bessarabov
+    This program is free software; you can redistribute it and/or modify it
+    under the terms of either: the GNU General Public License as published
+    by the Free Software Foundation; or the Artistic License.
 
-This program is free software; you can redistribute it and/or modify it
-under the terms of either: the GNU General Public License as published
-by the Free Software Foundation; or the Artistic License.
-
-See http://dev.perl.org/licenses/ for more information.
+    See http://dev.perl.org/licenses/ for more information.
 
