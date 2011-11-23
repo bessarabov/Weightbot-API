@@ -22,8 +22,8 @@ our $VERSION = '0.01';
 =head1 SYNOPSIS
 
 There is a great iPhone weight tracking app
-http://tapbots.com/software/weightbot/. It backups it's data to the site
-https://weightbot.com/ where everybody who uses that app can login and
+http://tapbots.com/software/weightbot/. It backups its data to the site
+https://weightbot.com/ where everyone using that app can login and
 download the file with the records.
 
 This module gets that data and shows it as a pretty data structure.
@@ -39,10 +39,10 @@ This module gets that data and shows it as a pretty data structure.
     say $wi->raw_data;
     say Dumper $wi->data;
 
-The object does not send requests to site until data is needed to be
-retrieved. The first executed method data() or raw_data() will get data from
-the site and the data will be stored in the object, so you can use raw_data()
-and data() many times without unnecessary requests.
+The object does not send requests to site until data needs to be
+retrieved. The first invocation of either data() or raw_data() methods will
+get data from the site and it will be stored in the object, so you can
+use raw_data() and data() many times without unnecessary requests to the site.
 
 Site https://weightbot.com/ does not have real API, this module behaves as a
 browser.
@@ -85,8 +85,8 @@ Here is an example:
     2008-12-06, 81.9, 180.6
     2008-12-08, 82.6, 182.1
 
-You can run this method many times but only the first run will get data from
-the site.
+Any subsequent call to this method will not result in actual data retrieval as
+the data is cached within the object.
 
 =cut
 
@@ -138,6 +138,9 @@ An example for the data show in raw_data() method:
                 'lb' => '182.1'
               }
             ];
+
+Any subsequent call to this method will not result in actual data retrieval as
+the data is cached within the object.
 
 =cut
 
