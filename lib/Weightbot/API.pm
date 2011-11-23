@@ -241,6 +241,10 @@ sub _get_data_if_needed {
 
 Ivan Bessarabov, C<< <ivan@bessarabov.ru> >>
 
+=head1 CONTRIBUTORS
+
+Evgeniy Kosov C<< <evgeniy@kosov.su> >>
+
 =head1 BUGS
 
 Please report any bugs or feature requests to C<bug-weightbot-api at rt.cpan.org>, or through
