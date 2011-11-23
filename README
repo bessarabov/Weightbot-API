@@ -42,7 +42,7 @@ SUBROUTINES/METHODS
         my $wi = Weightbot::API->new({
             email    => 'user@example.com',
             password => '******',
-        }); 
+        });
 
   raw_data
     Returns the weight records in the format as they are stored on the site.
@@ -101,18 +101,18 @@ SUBROUTINES/METHODS
     retrieval as the data is cached within the object.
 
 AUTHOR
-    Ivan Bessarabov, `<ivan@bessarabov.ru>'
+    Ivan Bessarabov, "<ivan@bessarabov.ru>"
 
 CONTRIBUTORS
     Evgeniy Kosov `<evgeniy@kosov.su>'
 
 BUGS
-    Please report any bugs or feature requests to `bug-weightbot-api at
-    rt.cpan.org', or through the web interface at
-    http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Weightbot-API. I will be
-    notified, and then you'll automatically be notified of progress on your
-    bug as I make changes. You can also submit a bug or a feature request on
-    GitHub.
+    Please report any bugs or feature requests to "bug-weightbot-api at
+    rt.cpan.org", or through the web interface at
+    <http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Weightbot-API>. I will
+    be notified, and then you'll automatically be notified of progress on
+    your bug as I make changes. You can also submit a bug or a feature
+    request on GitHub.
 
 SOURCE CODE
     The source code for this module is hosted on GitHub
@@ -125,17 +125,21 @@ SUPPORT
 
     You can also look for information at:
 
-    * RT: CPAN's request tracker
-        http://rt.cpan.org/NoAuth/Bugs.html?Dist=Weightbot-API
+    *   RT: CPAN's request tracker
 
-    * AnnoCPAN: Annotated CPAN documentation
-        http://annocpan.org/dist/Weightbot-API
+        <http://rt.cpan.org/NoAuth/Bugs.html?Dist=Weightbot-API>
 
-    * CPAN Ratings
-        http://cpanratings.perl.org/d/Weightbot-API
+    *   AnnoCPAN: Annotated CPAN documentation
 
-    * Search CPAN
-        http://search.cpan.org/dist/Weightbot-API/
+        <http://annocpan.org/dist/Weightbot-API>
+
+    *   CPAN Ratings
+
+        <http://cpanratings.perl.org/d/Weightbot-API>
+
+    *   Search CPAN
+
+        <http://search.cpan.org/dist/Weightbot-API/>
 
 ACKNOWLEDGEMENTS
 LICENSE AND COPYRIGHT
