@@ -2,3 +2,5 @@
 
  * add method to get data for the second time
  * put pod2readme in make process
+ * use croak insted of die
+ * croak if there are unknown parameters in constructor

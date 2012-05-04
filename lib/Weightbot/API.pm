@@ -5,6 +5,7 @@ use strict;
 
 use WWW::Mechanize;
 use Class::Date qw(date);
+use File::Slurp;
 
 =head1 NAME
 
@@ -34,7 +35,7 @@ This module gets that data and shows it as a pretty data structure.
     my $wi = Weightbot::API->new({
         email    => 'user@example.com',
         password => '******',
-    }); 
+    });
 
     say $wi->raw_data;
     say Dumper $wi->data;
@@ -47,6 +48,28 @@ use raw_data() and data() many times without unnecessary requests to the site.
 Site https://weightbot.com/ does not have real API, this module behaves as a
 browser.
 
+=head2 NOTES
+
+While debugging your programme that uses this module it is not a great idea to
+send requests to weightbot.com on every test run. This module can cache data
+to file. The module will read data from the cache file if the file exists or
+will download data and save it to the file if there is no cache file.
+
+To use this feature you should create Weightbot::API object with:
+
+    my $wi = Weightbot::API->new({
+        email    => 'user@example.com',
+        password => '******',
+        use_cache_file => 1,
+        cache_file     => '/storage/weightbot.raw',     # optional
+    });
+
+The default value for 'cache_file' is '/tmp/weightbot.data'.
+
+So when you debug your programme you can specify 'use_cache_file'. Then on
+first run the data will be downloaded from weightbot.com and saved to file and
+all other runs will use data from the file without asking weightbot.com.
+
 =head1 SUBROUTINES/METHODS
 
 =head2 new
@@ -58,7 +81,7 @@ Optionally you can specify 'site' with some custom site url (default is
     my $wi = Weightbot::API->new({
         email    => 'user@example.com',
         password => '******',
-    }); 
+    });
 
 =cut
 
@@ -102,7 +125,7 @@ sub raw_data {
 
 Returns the weight data in a structure. In that data some dates can be
 skipped. In this structure all the dates are present, but if there is no
-weight for that date the empty sting is used. 
+weight for that date the empty sting is used.
 
 An example for the data show in raw_data() method:
 
@@ -172,23 +195,23 @@ sub data {
                 while ($d != $expected_date) {
                     push @$result, {
                         date => "$expected_date",
-                        kg => '', 
-                        lb => '', 
-                        n => $n, 
-                    };  
+                        kg => '',
+                        lb => '',
+                        n => $n,
+                    };
                     $expected_date += '1D';
                     $n++;
                 }
 
-            }   
-            
+            }
+
             push @$result, {
                 date => "$d",
-                kg => $k, 
-                lb => $p, 
-                n => $n, 
-            };  
-            $prev_date = $d; 
+                kg => $k,
+                lb => $p,
+                n => $n,
+            };
+            $prev_date = $d;
             $n++;
         }
         $self->{data} = $result;
@@ -209,6 +232,19 @@ for the data, witch is stored in the object.
 
 sub _get_data_if_needed {
     my ($self) = @_;
+
+    my $cache_filename;
+
+    if ($self->{use_cache_file}) {
+        $cache_filename
+            = defined($self->{cache_file})
+            ? $self->{cache_file}
+            : '/tmp/weightbot.data';
+
+        if (-e $cache_filename) {
+            $self->{raw_data} = read_file($cache_filename);
+        }
+    }
 
     unless ($self->{raw_data}) {
         my $mech = WWW::Mechanize->new(
@@ -235,6 +271,10 @@ sub _get_data_if_needed {
 
         $self->{raw_data} = $mech->content;
     }
+
+    if ($self->{use_cache_file}) {
+        write_file($cache_filename, $self->{raw_data});
+    }
 }
 
 =head1 AUTHOR
@@ -252,7 +292,7 @@ the web interface at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Weightbot-
 automatically be notified of progress on your bug as I make changes.
 You can also submit a bug or a feature request on GitHub.
 
-=head1 SOURCE CODE 
+=head1 SOURCE CODE
 
 The source code for this module is hosted on GitHub http://github.com/bessarabov/Weightbot-API
 

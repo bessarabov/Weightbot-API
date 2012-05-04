@@ -15,6 +15,7 @@ WriteMakefile(
         'Test::More'     => 0,
         'WWW::Mechanize' => 0,
         'Class::Date'    => 0,
+        'File::Slurp'    => 0,
     },
     dist                => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
     clean               => { FILES => 'Weightbot-API-*' },
