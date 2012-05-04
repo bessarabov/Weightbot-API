@@ -3,3 +3,5 @@ Revision history for Weightbot-API
 0.01    2011-11-19
         * First public release
 
+0.02    2012-05-04
+        * New feature - use_cache_file

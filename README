@@ -18,7 +18,7 @@ SYNOPSIS
         my $wi = Weightbot::API->new({
             email    => 'user@example.com',
             password => '******',
-        }); 
+        });
 
         say $wi->raw_data;
         say Dumper $wi->data;
@@ -32,6 +32,29 @@ SYNOPSIS
     Site https://weightbot.com/ does not have real API, this module behaves
     as a browser.
 
+  NOTES
+    While debugging your programme that uses this module it is not a great
+    idea to send requests to weightbot.com on every test run. This module
+    can cache data to file. The module will read data from the cache file if
+    the file exists or will download data and save it to the file if there
+    is no cache file.
+
+    To use this feature you should create Weightbot::API object with:
+
+        my $wi = Weightbot::API->new({
+            email    => 'user@example.com',
+            password => '******',
+            use_cache_file => 1,
+            cache_file     => '/storage/weightbot.raw',     # optional
+        });
+
+    The default value for 'cache_file' is '/tmp/weightbot.data'.
+
+    So when you debug your programme you can specify 'use_cache_file'. Then
+    on first run the data will be downloaded from weightbot.com and saved to
+    file and all other runs will use data from the file without asking
+    weightbot.com.
+
 SUBROUTINES/METHODS
   new
     Creates new object. It has to get parameters 'email' and 'password'.
@@ -42,7 +65,7 @@ SUBROUTINES/METHODS
         my $wi = Weightbot::API->new({
             email    => 'user@example.com',
             password => '******',
-        }); 
+        });
 
   raw_data
     Returns the weight records in the format as they are stored on the site.
