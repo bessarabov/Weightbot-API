@@ -9,7 +9,7 @@ use File::Slurp;
 
 =head1 NAME
 
-Weightbot::API - Get Weightbot iPhone app data from weightbot.com
+Weightbot::API - get Weightbot iPhone app data from weightbot.com
 
 =head1 VERSION
 
