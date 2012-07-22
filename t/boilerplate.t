@@ -2,12 +2,13 @@
 
 use strict;
 use warnings;
+use Carp;
 use Test::More tests => 3;
 
 sub not_in_file_ok {
     my ($filename, %regex) = @_;
     open( my $fh, '<', $filename )
-        or die "couldn't open $filename for reading: $!";
+        or croak "couldn't open $filename for reading: $!";
 
     my %violated;
 

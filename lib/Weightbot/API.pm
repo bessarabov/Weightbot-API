@@ -3,6 +3,7 @@ package Weightbot::API;
 use warnings;
 use strict;
 
+use Carp;
 use WWW::Mechanize;
 use Class::Date qw(date);
 use File::Slurp;
@@ -18,7 +19,6 @@ Version 0.02
 =cut
 
 our $VERSION = '0.02';
-
 
 =head1 SYNOPSIS
 
@@ -88,8 +88,8 @@ Optionally you can specify 'site' with some custom site url (default is
 sub new {
     my ($class, $self) = @_;
 
-    die 'No email specified, stopped' unless $self->{email};
-    die 'No password specified, stopped' unless $self->{password};
+    croak 'No email specified, stopped' unless $self->{email};
+    croak 'No password specified, stopped' unless $self->{password};
 
     $self->{site} ||= 'https://weightbot.com';
 
@@ -188,7 +188,7 @@ sub data {
 
             if ($prev_date) {
                 if ($d < $prev_date) {
-                    die "Date '$d' is earlier than '$prev_date', stopped";
+                    croak "Date '$d' is earlier than '$prev_date', stopped";
                 }
 
                 my $expected_date = $prev_date + '1D';
@@ -266,7 +266,7 @@ sub _get_data_if_needed {
         );
 
         if ($mech->content !~ /^date, kilograms, pounds\n/) {
-            die "Recieved incorrect data, stopped"
+            croak "Recieved incorrect data, stopped"
         }
 
         $self->{raw_data} = $mech->content;
