@@ -192,7 +192,7 @@ sub data {
                 }
 
                 my $expected_date = $prev_date + '1D';
-                while ($d != $expected_date) {
+                while ("$d" ne "$expected_date") {
                     push @$result, {
                         date => "$expected_date",
                         kg => '',
