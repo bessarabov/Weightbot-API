@@ -1,12 +1,8 @@
 Changes
-lib/Weightbot/API.pm
-Makefile.PL
 MANIFEST
+Makefile.PL
 README
-t/00-load.t
-t/boilerplate.t
-t/manifest.t
 TODO
-t/pod-coverage.t
-t/pod.t
+lib/Weightbot/API.pm
+t/00-load.t
 t/weightbot-api-data.t
