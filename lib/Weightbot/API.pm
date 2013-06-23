@@ -1,5 +1,7 @@
 package Weightbot::API;
 
+# ABSTRACT: get Weightbot iPhone app data from weightbot.com
+
 use warnings;
 use strict;
 
@@ -7,18 +9,6 @@ use Carp;
 use WWW::Mechanize;
 use Class::Date qw(date);
 use File::Slurp;
-
-=head1 NAME
-
-Weightbot::API - get Weightbot iPhone app data from weightbot.com
-
-=head1 VERSION
-
-Version 0.03
-
-=cut
-
-our $VERSION = '0.03';
 
 =head1 SYNOPSIS
 
@@ -248,7 +238,7 @@ sub _get_data_if_needed {
 
     unless ($self->{raw_data}) {
         my $mech = WWW::Mechanize->new(
-            agent => "Weightbot::API/$VERSION"
+            agent => "Weightbot::API/$Weightbot::API::VERSION"
         );
 
         $mech->get( $self->{site} . '/account/login');
@@ -277,10 +267,6 @@ sub _get_data_if_needed {
     }
 }
 
-=head1 AUTHOR
-
-Ivan Bessarabov, C<< <ivan@bessarabov.ru> >>
-
 =head1 CONTRIBUTORS
 
 Evgeniy Kosov C<< <evgeniy@kosov.su> >>
@@ -296,50 +282,6 @@ You can also submit a bug or a feature request on GitHub.
 
 The source code for this module is hosted on GitHub http://github.com/bessarabov/Weightbot-API
 
-=head1 SUPPORT
-
-You can find documentation for this module with the perldoc command.
-
-    perldoc Weightbot::API
-
-
-You can also look for information at:
-
-=over 4
-
-=item * RT: CPAN's request tracker
-
-L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=Weightbot-API>
-
-=item * AnnoCPAN: Annotated CPAN documentation
-
-L<http://annocpan.org/dist/Weightbot-API>
-
-=item * CPAN Ratings
-
-L<http://cpanratings.perl.org/d/Weightbot-API>
-
-=item * Search CPAN
-
-L<http://search.cpan.org/dist/Weightbot-API/>
-
-=back
-
-
-=head1 ACKNOWLEDGEMENTS
-
-
-=head1 LICENSE AND COPYRIGHT
-
-Copyright 2011 Ivan Bessarabov.
-
-This program is free software; you can redistribute it and/or modify it
-under the terms of either: the GNU General Public License as published
-by the Free Software Foundation; or the Artistic License.
-
-See http://dev.perl.org/licenses/ for more information.
-
-
 =cut
 
-1; # End of Weightbot::API
+1;
