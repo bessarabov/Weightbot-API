@@ -11,3 +11,15 @@ Revision history for Weightbot-API
 
 0.04    2013-06-23
         * Switched to Dist::Zilla
+
+1.0.0   2013-08-28
+        [Major]
+        * Switched to SemVer
+
+        [Minor]
+        * Ignoring incorrect SSL certificate at https://weightbot.com
+
+        [Patch]
+        * Added Prereqs section in dist.ini
+        * Removed unnecessary tests
+        * Fixing travis
