@@ -41,6 +41,9 @@ browser.
 
 =head2 NOTES
 
+Weightbot::API version numbers uses Semantic Versioning standart.
+Please visit L<http://semver.org/> to find out all about this great thing.
+
 While debugging your programme that uses this module it is not a great idea to
 send requests to weightbot.com on every test run. This module can cache data
 to file. The module will read data from the cache file if the file exists or
