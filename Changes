@@ -23,3 +23,7 @@ Revision history for Weightbot-API
         * Added Prereqs section in dist.ini
         * Removed unnecessary tests
         * Fixing travis
+
+1.1.0   2013-08-30
+        [Minor]
+        * Working with https://weightbot.com only if SSL cert is correct
