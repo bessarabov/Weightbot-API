@@ -274,16 +274,15 @@ sub _get_data_if_needed {
 
 Evgeniy Kosov C<< <evgeniy@kosov.su> >>
 
-=head1 BUGS
-
-Please report any bugs or feature requests to C<bug-weightbot-api at rt.cpan.org>, or through
-the web interface at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Weightbot-API>.  I will be notified, and then you'll
-automatically be notified of progress on your bug as I make changes.
-You can also submit a bug or a feature request on GitHub.
-
 =head1 SOURCE CODE
 
-The source code for this module is hosted on GitHub http://github.com/bessarabov/Weightbot-API
+The source code for this module and scripts is hosted on GitHub
+L<https://github.com/bessarabov/Weightbot-API>
+
+=head1 BUGS
+
+Please report any bugs or feature requests in GitHub Issues
+L<https://github.com/bessarabov/Weightbot-API/issues>
 
 =cut
 
